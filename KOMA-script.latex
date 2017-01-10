@@ -1,4 +1,18 @@
-\documentclass[$if(fontsize)$fontsize=$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(DIV)$DIV=$DIV$,$endif$$if(BCOR)$BCOR=$BCOR$,$endif$$if(papersize)$paper=$papersize$,$endif$$if(paper)$paper=$paper$,$endif$$if(parskip)$parskip=$parskip$,$endif$$if(headings)$headings=$headings$,$endif$$if(headlines)$headlines=$headlines$,$endif$$if(headheight)$headheight=$headheight$,$endif$$if(footlines)$footlines=$footlines$,$endif$$if(footheight)$footheight=$footheight$,$endif$$if(open)$open=$open$,$endif$$if(toc)$toc=$toc$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$fontsize=$fontsize$,$endif$%
+$if(lang)$$babel-lang$,$endif$%
+$if(DIV)$DIV=$DIV$,$endif$%
+$if(BCOR)$BCOR=$BCOR$,$endif$%
+$if(papersize)$paper=$papersize$,$endif$%
+$if(paper)$paper=$paper$,$endif$%
+$if(parskip)$parskip=$parskip$,$endif$%
+$if(headings)$headings=$headings$,$endif$%
+$if(headlines)$headlines=$headlines$,$endif$%
+$if(headheight)$headheight=$headheight$,$endif$%
+$if(footlines)$footlines=$footlines$,$endif$%
+$if(footheight)$footheight=$footheight$,$endif$%
+$if(open)$open=$open$,$endif$%
+$if(toc)$toc=$toc$,$endif$%
+$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
