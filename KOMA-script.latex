@@ -1,3 +1,9 @@
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+$if(colorlinks)$
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+$endif$
+\PassOptionsToPackage{unicode=true}{hyperref}
+%
 \documentclass[$if(fontsize)$fontsize=$fontsize$,$endif$%
 $if(lang)$$babel-lang$,$endif$%
 $if(DIV)$DIV=$DIV$,$endif$%
@@ -35,11 +41,18 @@ $if(euro)$
   \usepackage{eurosym}
 $endif$
 \else % if luatex or xelatex
+$if(mathspec)$
   \ifxetex
     \usepackage{mathspec}
   \else
     \usepackage{fontspec}
+    \usepackage{unicode-math}
   \fi
+  \defaultfontfeatures{$if(defaultfontfeatures)$$defaultfontfeatures$$else$Ligatures=TeX,Scale=MatchLowercase$endif$}
+$else$
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+$endif$
   \defaultfontfeatures{$if(defaultfontfeatures)$$defaultfontfeatures$$else$Ligatures=TeX,Scale=MatchLowercase$endif$}
 $for(fontfamilies)$
   \newfontfamily{$fontfamilies.name$}[$fontfamilies.options$]{$fontfamilies.font$}
@@ -57,7 +70,15 @@ $if(monofont)$
     \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
+$if(mathspec)$
+  \ifxetex
     \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \else
+    \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+  \fi
+$else$
+  \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
+$endif$
 $endif$
   \ifxetex
 $if(CJKmainfont)$
@@ -82,12 +103,7 @@ $endif$
 \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\PassOptionsToPackage{backref}{hyperref}
-\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
 \usepackage{bookmark}
-$if(colorlinks)$
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
-$endif$
 \hypersetup{unicode=true,
 $if(title-meta)$
             pdftitle={$title-meta$},
