@@ -18,7 +18,8 @@ $if(footlines)$footlines=$footlines$,$endif$%
 $if(footheight)$footheight=$footheight$,$endif$%
 $if(open)$open=$open$,$endif$%
 $if(toc)$toc=$toc$,$endif$%
-$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+$for(classoption)$$classoption$$sep$,
+$endfor$]{$if(documentclass)$$documentclass$$else$scrartcl$endif$}
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
@@ -45,12 +46,10 @@ $if(mathspec)$
   \ifxetex
     \usepackage{mathspec}
   \else
-    \usepackage{fontspec}
     \usepackage{unicode-math}
   \fi
   \defaultfontfeatures{$if(defaultfontfeatures)$$defaultfontfeatures$$else$Ligatures=TeX,Scale=MatchLowercase$endif$}
 $else$
-  \usepackage{fontspec}
   \usepackage{unicode-math}
 $endif$
   \defaultfontfeatures{$if(defaultfontfeatures)$$defaultfontfeatures$$else$Ligatures=TeX,Scale=MatchLowercase$endif$}
@@ -104,6 +103,9 @@ $endif$
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 \usepackage{bookmark}
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
 \hypersetup{unicode=true,
 $if(title-meta)$
             pdftitle={$title-meta$},
@@ -124,6 +126,9 @@ $else$
 $endif$
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
 $if(lang)$
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
@@ -163,10 +168,6 @@ $if(lhs)$
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
-$endif$
-$if(verbatim-in-note)$
-\usepackage{fancyvrb}
-\VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
